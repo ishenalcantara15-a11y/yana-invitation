@@ -8,16 +8,25 @@ document.getElementById("openInvite").addEventListener("click", () => {
   document.body.classList.remove("intro-open");
 });
 
+// NAVIGATION MENU
 const menuToggle = document.getElementById("menuToggle");
 const navigation = document.getElementById("navigation");
-menuToggle.addEventListener("click", () => {
-  const open = navigation.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(open));
-});
-navigation.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-  navigation.classList.remove("open");
-  menuToggle.setAttribute("aria-expanded", "false");
-}));
+
+if (menuToggle && navigation) {
+
+    menuToggle.addEventListener("click", () => {
+        const open = navigation.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    navigation.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navigation.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+        });
+    });
+
+}
 
 // Event time is Philippines time (UTC+8): December 20, 2026 at 11:00 AM.
 const eventDate = new Date("2026-12-20T11:00:00+08:00").getTime();
