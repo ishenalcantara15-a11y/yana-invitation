@@ -189,3 +189,47 @@ const godparentsList = [
     { name: "Sebastian Cruz", role: "Ninong" },
     { name: "Danielle Lopez", role: "Ninang" }
 ];
+
+// GODPARENTS SEARCH FUNCTION
+
+const godparentSearch = document.getElementById("godparentSearch");
+const godparentResults = document.getElementById("godparentResults");
+
+if (godparentSearch && godparentResults) {
+
+    godparentSearch.addEventListener("input", function () {
+
+        const searchName = this.value.trim().toLowerCase();
+
+        if (searchName === "") {
+            godparentResults.innerHTML =
+                "<p>Your little surprise awaits... ♡</p>";
+            return;
+        }
+
+        const matches = godparentsList.filter(person =>
+            person.name.toLowerCase().includes(searchName)
+        );
+
+        if (matches.length > 0) {
+
+            godparentResults.innerHTML = matches.map(person => `
+                <div class="godparent-result">
+                    <h3>${person.name}</h3>
+                    <span>${person.role} ♡</span>
+                    <p>You're one of Yana's special godparents!</p>
+                </div>
+            `).join("");
+
+        } else {
+
+            godparentResults.innerHTML = `
+                <p>Sorry, we couldn't find your name. ♡</p>
+                <small>Please check your spelling or contact the family.</small>
+            `;
+
+        }
+
+    });
+
+}
