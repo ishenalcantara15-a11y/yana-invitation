@@ -283,4 +283,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Yana's invitation website loaded successfully! ♡");
 
+    // BACKGROUND MUSIC PLAYER
+const backgroundMusic = document.getElementById("backgroundMusic");
+const musicToggle = document.getElementById("musicToggle");
+
+if (backgroundMusic && musicToggle) {
+    musicToggle.addEventListener("click", function () {
+
+        if (backgroundMusic.paused) {
+            backgroundMusic.play()
+                .then(() => {
+                    musicToggle.textContent = "🎵 Pause Music";
+                    musicToggle.classList.add("playing");
+                })
+                .catch(() => {
+                    musicToggle.textContent = "🎵 Play Music";
+                });
+
+        } else {
+            backgroundMusic.pause();
+            musicToggle.textContent = "🎵 Play Music";
+            musicToggle.classList.remove("playing");
+        }
+
+    });
+
+    backgroundMusic.addEventListener("ended", function () {
+        musicToggle.textContent = "🎵 Play Music";
+        musicToggle.classList.remove("playing");
+    });
+}
 });
