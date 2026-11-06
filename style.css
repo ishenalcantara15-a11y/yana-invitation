@@ -955,5 +955,34 @@ footer {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+/* BACKGROUND MUSIC BUTTON */
+.music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
 
+    background: linear-gradient(135deg, #f7c9d8, #e6dcf5);
+    color: #665568;
+
+    border: 2px solid white;
+    border-radius: 30px;
+
+    padding: 12px 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease;
+}
+
+.music-toggle:hover {
+    transform: scale(1.08);
+}
+
+.music-toggle.playing {
+    background: linear-gradient(135deg, #cce8f5, #f7c9d8);
+}
 }

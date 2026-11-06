@@ -88,3 +88,44 @@ form.addEventListener("submit", async event => {
 });
 
 document.getElementById("backToTop").addEventListener("click", () => window.scrollTo({top:0,behavior:"smooth"}));
+// BACKGROUND MUSIC PLAYER
+const backgroundMusic = document.getElementById("backgroundMusic");
+const musicToggle = document.getElementById("musicToggle");
+const openInviteButton = document.getElementById("openInvite");
+
+// Play music
+async function playBackgroundMusic() {
+    try {
+        await backgroundMusic.play();
+
+        musicToggle.textContent = "🎵 Pause Music";
+        musicToggle.classList.add("playing");
+        musicToggle.setAttribute("aria-label", "Pause music");
+
+    } catch (error) {
+        console.log("Music could not play:", error);
+    }
+}
+
+// Pause music
+function pauseBackgroundMusic() {
+    backgroundMusic.pause();
+
+    musicToggle.textContent = "🎵 Play Music";
+    musicToggle.classList.remove("playing");
+    musicToggle.setAttribute("aria-label", "Play music");
+}
+
+// Music button
+musicToggle.addEventListener("click", function () {
+    if (backgroundMusic.paused) {
+        playBackgroundMusic();
+    } else {
+        pauseBackgroundMusic();
+    }
+});
+
+// Start music when invitation is opened
+openInviteButton.addEventListener("click", function () {
+    playBackgroundMusic();
+});
