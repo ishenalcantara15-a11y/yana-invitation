@@ -4,17 +4,11 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ==========================================
-    // GOOGLE SHEETS RSVP CONNECTION
-    // ==========================================
-
+    // GOOGLE SHEETS RSVP
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbwkSxbXNJEwkM5FOSQl-rlesuG_K9UpifeKPCMg9mx7Bc9sC5o6IXHJLbdB-7WAAgMknA/exec";
 
 
-    // ==========================================
     // OPEN INVITATION
-    // ==========================================
-
     const intro = document.getElementById("intro");
     const openInvite = document.getElementById("openInvite");
 
@@ -26,10 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==========================================
     // MOBILE NAVIGATION
-    // ==========================================
-
     const menuToggle = document.getElementById("menuToggle");
     const navigation = document.getElementById("navigation");
 
@@ -50,11 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==========================================
-    // COUNTDOWN TIMER
-    // DECEMBER 20, 2026 - 11:00 AM PHILIPPINES
-    // ==========================================
-
+    // COUNTDOWN
     const eventDate = new Date("2026-12-20T11:00:00+08:00").getTime();
 
     function updateCountdown() {
@@ -65,9 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const seconds = document.getElementById("seconds");
         const message = document.getElementById("countdownMessage");
 
-        if (!days || !hours || !minutes || !seconds) {
-            return;
-        }
+        if (!days || !hours || !minutes || !seconds) return;
 
         const distance = eventDate - Date.now();
 
@@ -79,26 +64,16 @@ document.addEventListener("DOMContentLoaded", function () {
             seconds.textContent = "0";
 
             if (message) {
-                message.textContent =
-                    "It's celebration time! Happy birthday, Yana! ♡";
+                message.textContent = "It's celebration time! Happy birthday, Yana! ♡";
             }
 
             return;
         }
 
         days.textContent = Math.floor(distance / 86400000);
-
-        hours.textContent = Math.floor(
-            (distance % 86400000) / 3600000
-        );
-
-        minutes.textContent = Math.floor(
-            (distance % 3600000) / 60000
-        );
-
-        seconds.textContent = Math.floor(
-            (distance % 60000) / 1000
-        );
+        hours.textContent = Math.floor((distance % 86400000) / 3600000);
+        minutes.textContent = Math.floor((distance % 3600000) / 60000);
+        seconds.textContent = Math.floor((distance % 60000) / 1000);
 
     }
 
@@ -106,17 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(updateCountdown, 1000);
 
 
-    // ==========================================
     // RSVP FORM
-    // ==========================================
-
     const form = document.getElementById("rsvpForm");
     const status = document.getElementById("formStatus");
     const guestCount = document.getElementById("guestCount");
-
-    // Only run RSVP code if the form exists.
-    // This prevents missing RSVP elements from
-    // stopping the Godparents search.
 
     if (form && status && guestCount) {
 
@@ -128,11 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     guestCount.value = 0;
                 }
 
-                if (
-                    radio.value === "Yes" &&
-                    radio.checked &&
-                    Number(guestCount.value) === 0
-                ) {
+                if (radio.value === "Yes" && radio.checked && Number(guestCount.value) === 0) {
                     guestCount.value = 1;
                 }
 
@@ -140,14 +104,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-
         form.addEventListener("submit", async function (event) {
 
             event.preventDefault();
 
-            const data = Object.fromEntries(
-                new FormData(form).entries()
-            );
+            const data = Object.fromEntries(new FormData(form).entries());
 
             data.guestCount = Number(data.guestCount);
 
@@ -156,10 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (data.attendance === "Yes" && data.guestCount < 1) {
-
-                status.textContent =
-                    "Please enter at least 1 person if you are attending.";
-
+                status.textContent = "Please enter at least 1 person if you are attending.";
                 return;
             }
 
@@ -169,8 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.disabled = true;
                 button.textContent = "Sending...";
             }
-
-            status.textContent = "";
 
             try {
 
@@ -183,18 +139,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     body: JSON.stringify(data)
                 });
 
-                status.textContent =
-                    "Thank you! Your RSVP has been sent. ♡";
+                status.textContent = "Thank you! Your RSVP has been sent. ♡";
 
                 form.reset();
                 guestCount.value = 1;
 
             } catch (error) {
 
-                console.error("RSVP error:", error);
+                console.error(error);
 
-                status.textContent =
-                    "Sorry, something went wrong. Please try again or contact the host.";
+                status.textContent = "Sorry, something went wrong. Please try again.";
 
             } finally {
 
@@ -210,42 +164,34 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // ==========================================
-    // BACK TO TOP BUTTON
-    // ==========================================
-
+    // BACK TO TOP
     const backToTop = document.getElementById("backToTop");
 
     if (backToTop) {
-
         backToTop.addEventListener("click", function () {
-
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
-
         });
-
     }
 
 
     // ==========================================
     // GODPARENTS LIST
-    // 20 NINONGS + 20 NINANGS
     // ==========================================
 
     const godparentsList = [
 
         { name: "Juan Dela Cruz", role: "Ninong" },
         { name: "Maria Clara", role: "Ninang" },
-        { name: "Pedro Santos", role: "Ninong" },
-        { name: "Ana Reyes", role: "Ninang" },
-        { name: "Miguel Garcia", role: "Ninong" },
-        { name: "Sofia Mendoza", role: "Ninang" },
+        { name: "Arjen Manahan", role: "Ninong" },
+        { name: "Aubrey Manahan", role: "Ninang" },
+        { name: "Victorino Arellano", role: "Ninong" },
+        { name: "Kristine Alcantara", role: "Ninang" },
         { name: "Carlo Bautista", role: "Ninong" },
-        { name: "Isabella Flores", role: "Ninang" },
-        { name: "Gabriel Ramos", role: "Ninong" },
+        { name: "Ishen Alcantara", role: "Ninang" },
+        { name: "Daniel David San Gabriel", role: "Ninong" },
         { name: "Camille Torres", role: "Ninang" },
         { name: "Daniel Fernandez", role: "Ninong" },
         { name: "Angela Cruz", role: "Ninang" },
@@ -282,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // GODPARENTS SEARCH FUNCTION
+    // GODPARENTS SEARCH
     // ==========================================
 
     const godparentSearch = document.getElementById("godparentSearch");
@@ -297,19 +243,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 .toLowerCase();
 
             if (searchName === "") {
-
-                godparentResults.innerHTML =
-                    "<p>Your little surprise awaits... ♡</p>";
-
+                godparentResults.innerHTML = "<p>Your little surprise awaits... ♡</p>";
                 return;
             }
 
             const matches = godparentsList.filter(function (person) {
-
-                return person.name
-                    .toLowerCase()
-                    .includes(searchName);
-
+                return person.name.toLowerCase().includes(searchName);
             });
 
             if (matches.length > 0) {
@@ -330,9 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 godparentResults.innerHTML = `
                     <p>Sorry, we couldn't find your name. ♡</p>
-                    <small>
-                        Please check your spelling or contact the family.
-                    </small>
+                    <small>Please check your spelling or contact the family.</small>
                 `;
 
             }
@@ -340,11 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     } else {
-
-        console.error(
-            "Godparents search elements are missing. Check godparentSearch and godparentResults in index.html."
-        );
-
+        console.error("Godparents search elements are missing.");
     }
 
 
