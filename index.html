@@ -393,12 +393,17 @@
 
             <label for="godparentSearch">Find your name here ♡</label>
 
-            <input
-                type="text"
-                id="godparentSearch"
-                placeholder="Type your first or last name..."
-                autocomplete="off"
-            >
+           <div class="godparent-search-box">
+    <span class="search-icon">🔍</span>
+
+    <input
+        type="search"
+        id="godparentSearch"
+        placeholder="Search your name here..."
+        autocomplete="off"
+        aria-label="Search for a godparent's name"
+    >
+</div>
 
             <div id="godparentResults" class="godparent-results">
                 <p> Your little surprise awaits... ♡ </p>
@@ -448,9 +453,7 @@
       ↑
     </button>
 
-  </footer>
-
-</button>
+    </footer>
 
   <script src="script.js"></script>
 

@@ -1131,3 +1131,43 @@ footer {
         padding: 50px 18px 25px;
     }
 }
+/* GODPARENTS SEARCH BAR */
+
+.godparent-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    padding: 5px 18px;
+    background: #ffffff;
+    border: 2px solid #e6b8d0;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(217, 111, 152, 0.12);
+}
+
+.godparent-search-box .search-icon {
+    font-size: 20px;
+}
+
+.godparent-search-box input {
+    width: 100%;
+    min-width: 0;
+    padding: 14px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #665568;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.godparent-search-box input::placeholder {
+    color: #b99aaa;
+}
+
+.godparent-search-box:focus-within {
+    border-color: #d96f98;
+    box-shadow: 0 0 0 4px rgba(217, 111, 152, 0.12);
+}
