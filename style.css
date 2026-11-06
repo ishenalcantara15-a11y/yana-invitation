@@ -954,93 +954,180 @@ footer {
   }
 }
 
-/* GODPARENTS SECTION */
+/* =================================
+   YANA'S CIRCLE OF LOVE
+================================= */
+
 .godparents-section {
-    background: linear-gradient(135deg, #ffe5ef, #eee4ff, #e1f3ff);
+    background:
+        radial-gradient(circle at 10% 20%, #fff1f6 0 8%, transparent 9%),
+        radial-gradient(circle at 90% 80%, #e9e0ff 0 8%, transparent 9%),
+        linear-gradient(135deg, #fff8f5, #fce8f1, #eee8ff);
+    padding: 90px 20px;
 }
 
-.godparents-card {
-    max-width: 550px;
-    margin: 25px auto;
-    padding: 35px 25px;
-    background: #ffffffdf;
-    border: 2px solid white;
-    border-radius: 30px;
-    box-shadow: 0 12px 35px #8b6b9b18;
-    text-align: left;
-}
-
-.godparents-icon {
+.godparents-book {
+    position: relative;
+    max-width: 750px;
+    margin: auto;
+    padding: 55px 35px;
     text-align: center;
-    font-size: 3rem;
-    margin-bottom: 15px;
+    background: #fffdfb;
+    border: 3px solid #f3d8e5;
+    border-radius: 35px 35px 35px 10px;
+    box-shadow: 12px 15px 0 #e8d7ed, 0 20px 45px #9b7c9b25;
 }
 
-.godparents-card > label {
-    display: block;
+.godparents-book::before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 15px;
+    width: 5px;
+    border-left: 2px dashed #edc8dc;
+}
+
+.book-decoration {
+    color: #d98caf;
+    font-size: 2rem;
+    letter-spacing: 12px;
+    margin-bottom: 20px;
+}
+
+.godparents-book .eyebrow {
+    color: #c17da1;
     font-weight: 800;
-    margin-bottom: 8px;
-    color: var(--purple-deep);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: .75rem;
 }
 
-.godparents-card input {
+.godparents-book .section-title {
+    color: #bd779e;
+    font-size: clamp(2.3rem, 6vw, 3.5rem);
+    margin: 15px 0;
+}
+
+.godparents-book .section-intro {
+    max-width: 450px;
+    margin: 0 auto 35px;
+    line-height: 1.8;
+    color: #82738a;
+}
+
+.godparents-envelope {
+    position: relative;
+    max-width: 520px;
+    margin: 45px auto 30px;
+    padding: 55px 30px 35px;
+    background: linear-gradient(145deg, #fff0f6, #f1eaff);
+    border: 2px solid white;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px #b28ba51c;
+}
+
+.envelope-ribbon {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3.5rem;
+}
+
+.godparents-envelope h3 {
+    color: #a875a2;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.godparents-envelope > p {
+    color: #82738a;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.godparents-envelope label {
+    display: block;
+    text-align: left;
+    font-weight: 800;
+    color: #a875a2;
+    margin-bottom: 10px;
+}
+
+.godparents-envelope input {
     width: 100%;
-    padding: 15px;
-    border: 2px solid #eadcf0;
+    padding: 16px;
+    border: 2px solid #e9cde0;
     border-radius: 15px;
-    outline: none;
-    background: #fffafd;
-    color: var(--ink);
+    background: #fffdfd;
+    color: #665568;
     font-family: 'Nunito', sans-serif;
     font-size: 1rem;
+    outline: none;
+    transition: .3s ease;
 }
 
-.godparents-card input:focus {
-    border-color: var(--pink-deep);
-    box-shadow: 0 0 0 3px #ffd6e788;
+.godparents-envelope input:focus {
+    border-color: #d98caf;
+    box-shadow: 0 0 0 4px #f7c9d855;
 }
 
-.godparent-results {
+.godparents-envelope .godparent-results {
     margin-top: 20px;
     padding: 15px;
     border-radius: 15px;
-    background: #fff5fa;
+    background: #ffffffbd;
     text-align: center;
 }
 
-.godparent-results p {
-    color: #8d8097;
+.godparents-envelope .godparent-result {
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 1px dashed #dfb8d4;
+    border-radius: 18px;
+    background: #fffafd;
 }
 
-.godparent-result {
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 15px;
-    background: white;
-    border: 1px solid #f1ddec;
+.godparents-envelope .godparent-result h3 {
+    color: #c17da1;
+    font-size: 1.3rem;
 }
 
-.godparent-result:last-child {
-    margin-bottom: 0;
-}
-
-.godparent-result h3 {
-    color: var(--pink-deep);
-    margin-bottom: 4px;
-}
-
-.godparent-result span {
+.godparents-envelope .godparent-result span {
     display: inline-block;
-    padding: 5px 14px;
+    padding: 6px 16px;
+    margin: 8px 0;
     border-radius: 20px;
-    background: var(--purple);
-    color: var(--purple-deep);
+    background: #eee2fa;
+    color: #9272a4;
     font-size: .8rem;
     font-weight: 800;
 }
 
+.godparents-envelope .godparent-result p {
+    color: #82738a;
+    margin-top: 8px;
+}
+
+.book-footer {
+    margin-top: 35px;
+    color: #bd8ba9;
+    font-size: .85rem;
+    line-height: 2;
+    font-weight: 700;
+}
+
 @media (max-width: 600px) {
-    .godparents-card {
-        padding: 25px 18px;
+    .godparents-section {
+        padding: 65px 15px;
+    }
+
+    .godparents-book {
+        padding: 45px 20px;
+    }
+
+    .godparents-envelope {
+        padding: 50px 18px 25px;
     }
 }
