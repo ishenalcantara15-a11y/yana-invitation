@@ -388,6 +388,94 @@
 
 </section>
 
+<!-- RSVP SECTION -->
+<section class="section rsvp-section" id="rsvp">
+
+    <p class="eyebrow">We hope you can join us!</p>
+
+    <h2 class="script section-title">Will You Be There?</h2>
+
+    <p class="section-intro">
+        Kindly let us know if you'll be celebrating
+        Yana's special day with us. ♡
+    </p>
+
+    <form id="rsvpForm" class="rsvp-form">
+
+        <label for="guestName">Your Full Name</label>
+        <input
+            type="text"
+            id="guestName"
+            name="guestName"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <fieldset>
+            <legend>Will you be attending?</legend>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="Yes"
+                    required
+                >
+                Yes! I'll be there! ♡
+            </label>
+
+            <label class="radio-option">
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="No"
+                >
+                Sorry, I can't make it.
+            </label>
+        </fieldset>
+
+        <label for="guestCount">Number of Guests</label>
+        <input
+            type="number"
+            id="guestCount"
+            name="guestCount"
+            min="0"
+            max="20"
+            value="1"
+            required
+        >
+
+        <small class="form-hint">
+            If you cannot attend, the number will automatically become 0.
+        </small>
+
+        <label for="guestMessage">Message for Yana (Optional)</label>
+        <textarea
+            id="guestMessage"
+            name="guestMessage"
+            rows="4"
+            placeholder="Leave a sweet message for Yana..."
+        ></textarea>
+
+        <button
+            type="submit"
+            id="submitRsvp"
+            class="button button-primary submit-button"
+        >
+            Send RSVP ♡
+        </button>
+
+        <p id="formStatus" class="form-status"></p>
+
+    </form>
+
+    <p class="privacy-note">
+        Your response will be recorded to help the family
+        prepare for the celebration. ♡
+    </p>
+
+</section>
+
 <!-- CLOSING -->
 <section class="closing-section section">
 
