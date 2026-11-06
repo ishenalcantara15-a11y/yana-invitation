@@ -106,26 +106,56 @@ async function playBackgroundMusic() {
         console.log("Music could not play:", error);
     }
 }
+// GODPARENTS SEARCH
 
-// Pause music
-function pauseBackgroundMusic() {
-    backgroundMusic.pause();
+const godparentsList = [
+    { name: "Juan Dela Cruz", role: "Ninong" },
+    { name: "Pedro Santos", role: "Ninong" },
+    { name: "Miguel Reyes", role: "Ninong" },
+    { name: "Maria Clara", role: "Ninang" },
+    { name: "Ana Santos", role: "Ninang" },
+    { name: "Sofia Garcia", role: "Ninang" }
+];
 
-    musicToggle.textContent = "🎵 Play Music";
-    musicToggle.classList.remove("playing");
-    musicToggle.setAttribute("aria-label", "Play music");
+const godparentSearch = document.getElementById("godparentSearch");
+const godparentResults = document.getElementById("godparentResults");
+
+if (godparentSearch && godparentResults) {
+
+    godparentSearch.addEventListener("input", function () {
+
+        const searchName = this.value.trim().toLowerCase();
+
+        if (searchName === "") {
+            godparentResults.innerHTML =
+                "<p>Type your name to check the godparents list. ♡</p>";
+            return;
+        }
+
+        const matches = godparentsList.filter(function (person) {
+            return person.name.toLowerCase().includes(searchName);
+        });
+
+        if (matches.length > 0) {
+
+            godparentResults.innerHTML = matches.map(function (person) {
+                return `
+                    <div class="godparent-result">
+                        <h3>${person.name}</h3>
+                        <span>${person.role} ♡</span>
+                        <p>You're one of Yana's special godparents!</p>
+                    </div>
+                `;
+            }).join("");
+
+        } else {
+
+            godparentResults.innerHTML = `
+                <p>Sorry, we couldn't find your name. ♡</p>
+                <small>Please check your spelling or contact the family.</small>
+            `;
+
+        }
+
+    });
 }
-
-// Music button
-musicToggle.addEventListener("click", function () {
-    if (backgroundMusic.paused) {
-        playBackgroundMusic();
-    } else {
-        pauseBackgroundMusic();
-    }
-});
-
-// Start music when invitation is opened
-openInviteButton.addEventListener("click", function () {
-    playBackgroundMusic();
-});

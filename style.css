@@ -954,30 +954,93 @@ footer {
   }
 }
 
-/* BACKGROUND MUSIC BUTTON */
-.music-toggle {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    left: auto;
-    z-index: 9999;
-    background: linear-gradient(135deg, #f7c9d8, #e6dcf5);
-    color: #665568;
+/* GODPARENTS SECTION */
+.godparents-section {
+    background: linear-gradient(135deg, #ffe5ef, #eee4ff, #e1f3ff);
+}
+
+.godparents-card {
+    max-width: 550px;
+    margin: 25px auto;
+    padding: 35px 25px;
+    background: #ffffffdf;
     border: 2px solid white;
     border-radius: 30px;
-    padding: 12px 20px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 14px;
+    box-shadow: 0 12px 35px #8b6b9b18;
+    text-align: left;
+}
+
+.godparents-icon {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.godparents-card > label {
+    display: block;
     font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: 0.3s ease;
+    margin-bottom: 8px;
+    color: var(--purple-deep);
 }
 
-.music-toggle:hover {
-    transform: scale(1.08);
+.godparents-card input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #eadcf0;
+    border-radius: 15px;
+    outline: none;
+    background: #fffafd;
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
 }
 
-.music-toggle.playing {
-    background: linear-gradient(135deg, #cce8f5, #f7c9d8);
+.godparents-card input:focus {
+    border-color: var(--pink-deep);
+    box-shadow: 0 0 0 3px #ffd6e788;
+}
+
+.godparent-results {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    background: #fff5fa;
+    text-align: center;
+}
+
+.godparent-results p {
+    color: #8d8097;
+}
+
+.godparent-result {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    background: white;
+    border: 1px solid #f1ddec;
+}
+
+.godparent-result:last-child {
+    margin-bottom: 0;
+}
+
+.godparent-result h3 {
+    color: var(--pink-deep);
+    margin-bottom: 4px;
+}
+
+.godparent-result span {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: var(--purple);
+    color: var(--purple-deep);
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+@media (max-width: 600px) {
+    .godparents-card {
+        padding: 25px 18px;
+    }
 }
