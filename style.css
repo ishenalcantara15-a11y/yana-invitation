@@ -1133,6 +1133,7 @@ footer {
 }
 /* GODPARENTS SEARCH BAR */
 
+/* GODPARENT SEARCH BAR */
 .godparent-search-box {
     display: flex;
     align-items: center;
@@ -1149,18 +1150,28 @@ footer {
 
 .godparent-search-box .search-icon {
     font-size: 20px;
+    flex-shrink: 0;
 }
 
-.godparent-search-box input {
+.godparent-search-box input,
+.godparent-search-box input:focus,
+.godparent-search-box input:active,
+.godparent-search-box input:hover {
+    flex: 1;
     width: 100%;
     min-width: 0;
     padding: 14px 0;
-    border: none;
-    outline: none;
-    background: transparent;
+    margin: 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
     color: #665568;
     font-family: inherit;
     font-size: 15px;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .godparent-search-box input::placeholder {
@@ -1168,6 +1179,84 @@ footer {
 }
 
 .godparent-search-box:focus-within {
-    border-color: #d96f98;
-    box-shadow: 0 0 0 4px rgba(217, 111, 152, 0.12);
+    border-color: #e6b8d0;
+    box-shadow: 0 5px 15px rgba(217, 111, 152, 0.12);
+}
+
+.godparent-search-box input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+.godparent-search-box .search-icon {
+    font-size: 20px;
+}
+
+.godparent-search-box input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 14px 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0;
+    color: #665568;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.godparent-search-box input:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* GODPARENTS SEARCH RESULTS */
+
+.godparents-envelope .godparent-results:empty {
+    display: none;
+}
+
+.godparents-envelope .godparent-results p {
+    margin: 5px 0;
+}
+
+.godparents-envelope .godparent-results small {
+    display: block;
+    color: #927e99;
+    margin-top: 8px;
+}
+
+.godparent-search-box input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+/* REMOVE THE INNER PINK BOX */
+.godparents-envelope .godparent-search-box input,
+.godparent-envelope .godparent-search-box input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 14px 0 !important;
+    margin: 0 !important;
+}
+
+/* KEEP THE INPUT CLEAN WHEN TYPING */
+.godparents-envelope .godparent-search-box input:focus,
+.godparent-envelope .godparent-search-box input:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* KEEP THE OUTER SEARCH BAR */
+.godparent-search-box {
+    background: #ffffff !important;
+    border: 2px solid #e6b8d0;
+    border-radius: 50px;
 }
