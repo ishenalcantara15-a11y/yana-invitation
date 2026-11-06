@@ -1298,23 +1298,64 @@ footer {
     }
 }
 
-/* FORCE FLOATING MUSIC BUTTON TO SHOW */
+/* =================================
+   FLOATING BACKGROUND MUSIC BUTTON
+================================= */
+
 #musicToggle {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+
     position: fixed !important;
     bottom: 25px !important;
-    left: 25px !important;
+    right: 25px !important;
+    left: auto !important;
+
     z-index: 999999 !important;
+
     align-items: center;
     justify-content: center;
+
     padding: 12px 20px;
+
     background: #fff0f6;
     color: #b85d85;
+
     border: 2px solid #e6b8d0;
     border-radius: 50px;
+
+    font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
+
     cursor: pointer;
+
     box-shadow: 0 4px 12px rgba(217, 111, 152, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+#musicToggle:hover {
+    background: #ffd6e7;
+    transform: translateY(-3px);
+}
+
+/* WHEN MUSIC IS PLAYING */
+#musicToggle.playing {
+    background: #f7c9d8;
+    color: #a94e77;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+    #musicToggle {
+        bottom: 15px !important;
+        right: 15px !important;
+        left: auto !important;
+
+        padding: 10px 16px;
+        font-size: 12px;
+    }
 }
