@@ -109,53 +109,83 @@ async function playBackgroundMusic() {
 // GODPARENTS SEARCH
 
 const godparentsList = [
+    // PAIR 1
     { name: "Juan Dela Cruz", role: "Ninong" },
-    { name: "Pedro Santos", role: "Ninong" },
-    { name: "Miguel Reyes", role: "Ninong" },
     { name: "Maria Clara", role: "Ninang" },
-    { name: "Ana Santos", role: "Ninang" },
-    { name: "Sofia Garcia", role: "Ninang" }
+
+    // PAIR 2
+    { name: "Pedro Santos", role: "Ninong" },
+    { name: "Ana Reyes", role: "Ninang" },
+
+    // PAIR 3
+    { name: "Miguel Garcia", role: "Ninong" },
+    { name: "Sofia Mendoza", role: "Ninang" },
+
+    // PAIR 4
+    { name: "Carlo Bautista", role: "Ninong" },
+    { name: "Isabella Flores", role: "Ninang" },
+
+    // PAIR 5
+    { name: "Gabriel Ramos", role: "Ninong" },
+    { name: "Camille Torres", role: "Ninang" },
+
+    // PAIR 6
+    { name: "Daniel Fernandez", role: "Ninong" },
+    { name: "Angela Cruz", role: "Ninang" },
+
+    // PAIR 7
+    { name: "Nathan Villanueva", role: "Ninong" },
+    { name: "Bianca Castillo", role: "Ninang" },
+
+    // PAIR 8
+    { name: "Joshua Ramirez", role: "Ninong" },
+    { name: "Patricia Gomez", role: "Ninang" },
+
+    // PAIR 9
+    { name: "Adrian Morales", role: "Ninong" },
+    { name: "Chloe Rivera", role: "Ninang" },
+
+    // PAIR 10
+    { name: "Lorenzo Aquino", role: "Ninong" },
+    { name: "Samantha Diaz", role: "Ninang" },
+
+    // PAIR 11
+    { name: "Francis Mendoza", role: "Ninong" },
+    { name: "Nicole Garcia", role: "Ninang" },
+
+    // PAIR 12
+    { name: "Mark Anthony Lopez", role: "Ninong" },
+    { name: "Andrea Santos", role: "Ninang" },
+
+    // PAIR 13
+    { name: "Christian Flores", role: "Ninong" },
+    { name: "Gabriella Reyes", role: "Ninang" },
+
+    // PAIR 14
+    { name: "Paolo Fernandez", role: "Ninong" },
+    { name: "Francesca Ramos", role: "Ninang" },
+
+    // PAIR 15
+    { name: "Enzo Castillo", role: "Ninong" },
+    { name: "Danica Bautista", role: "Ninang" },
+
+    // PAIR 16
+    { name: "Rafael Torres", role: "Ninong" },
+    { name: "Mikaela Villanueva", role: "Ninang" },
+
+    // PAIR 17
+    { name: "Stephen Gomez", role: "Ninong" },
+    { name: "Beatrice Aquino", role: "Ninang" },
+
+    // PAIR 18
+    { name: "Vincent Ramirez", role: "Ninong" },
+    { name: "Clarisse Morales", role: "Ninang" },
+
+    // PAIR 19
+    { name: "Luis Rivera", role: "Ninong" },
+    { name: "Trisha Diaz", role: "Ninang" },
+
+    // PAIR 20
+    { name: "Sebastian Cruz", role: "Ninong" },
+    { name: "Danielle Lopez", role: "Ninang" }
 ];
-
-const godparentSearch = document.getElementById("godparentSearch");
-const godparentResults = document.getElementById("godparentResults");
-
-if (godparentSearch && godparentResults) {
-
-    godparentSearch.addEventListener("input", function () {
-
-        const searchName = this.value.trim().toLowerCase();
-
-        if (searchName === "") {
-            godparentResults.innerHTML =
-                "<p>Type your name to check the godparents list. ♡</p>";
-            return;
-        }
-
-        const matches = godparentsList.filter(function (person) {
-            return person.name.toLowerCase().includes(searchName);
-        });
-
-        if (matches.length > 0) {
-
-            godparentResults.innerHTML = matches.map(function (person) {
-                return `
-                    <div class="godparent-result">
-                        <h3>${person.name}</h3>
-                        <span>${person.role} ♡</span>
-                        <p>You're one of Yana's special godparents!</p>
-                    </div>
-                `;
-            }).join("");
-
-        } else {
-
-            godparentResults.innerHTML = `
-                <p>Sorry, we couldn't find your name. ♡</p>
-                <small>Please check your spelling or contact the family.</small>
-            `;
-
-        }
-
-    });
-}
