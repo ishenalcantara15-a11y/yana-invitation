@@ -330,11 +330,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
     // ==========================================
     // WEBSITE LOADED
     // ==========================================
 
     console.log("Yana's invitation website loaded successfully! ♡");
 
+    // ==========================================
+// GALLERY PHOTO LIGHTBOX
+// ==========================================
+
+const galleryLinks = document.querySelectorAll(".gallery-month a");
+
+const galleryLightbox = document.createElement("div");
+galleryLightbox.className = "gallery-lightbox";
+galleryLightbox.innerHTML = `
+    <button class="gallery-lightbox-close" type="button" aria-label="Close photo">&times;</button>
+    <img src="" alt="Yana's memory">
+`;
+
+document.body.appendChild(galleryLightbox);
+
+const lightboxImage = galleryLightbox.querySelector("img");
+const lightboxClose = galleryLightbox.querySelector(".gallery-lightbox-close");
+
+galleryLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const photo = link.querySelector("img");
+
+        if (!photo || photo.hidden) return;
+
+        lightboxImage.src = photo.src;
+        lightboxImage.alt = photo.alt;
+
+        galleryLightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+});
+
+function closeGalleryLightbox() {
+    galleryLightbox.classList.remove("active");
+    document.body.style.overflow = "";
+    lightboxImage.src = "";
+}
+
+lightboxClose.addEventListener("click", closeGalleryLightbox);
+
+galleryLightbox.addEventListener("click", function (event) {
+    if (event.target === galleryLightbox) {
+        closeGalleryLightbox();
+    }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        closeGalleryLightbox();
+    }
+});
 });

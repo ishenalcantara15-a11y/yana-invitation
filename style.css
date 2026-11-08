@@ -1359,3 +1359,182 @@ footer {
         font-size: 12px;
     }
 }
+
+/* ==========================================
+   YANA'S MONTHLY MEMORIES GALLERY
+========================================== */
+
+.monthly-gallery {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.monthly-gallery .section-intro {
+    max-width: 600px;
+    margin: 15px auto 40px;
+}
+
+.gallery-months {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-month {
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid #f8d9ec;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(190, 140, 190, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-month:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(190, 140, 190, 0.2);
+}
+
+.gallery-month h3 {
+    color: #b56b9c;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.gallery-month > p {
+    color: #8e7895;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+.gallery-month a {
+    display: block;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff0f7;
+}
+
+.gallery-month img {
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: contain;
+    background: #fff0f7;
+    transition: transform 0.3s ease;
+}
+
+.gallery-month a:hover img {
+    transform: scale(1.04);
+}
+
+.gallery-placeholder {
+    padding: 45px 15px;
+    background: #fff0f7;
+    border: 2px dashed #e8b9d7;
+    border-radius: 16px;
+    color: #b56b9c;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 650px) {
+    .gallery-months {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .gallery-month {
+        padding: 16px;
+    }
+
+    .gallery-month img {
+        height: 300px;
+    }
+
+    .monthly-gallery {
+        padding: 50px 15px;
+    }
+}
+
+/* ==========================================
+   GALLERY PHOTO LIGHTBOX
+========================================== */
+
+.gallery-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(35, 20, 45, 0.88);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+.gallery-lightbox.active {
+    display: flex;
+}
+
+.gallery-lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: galleryZoom 0.3s ease;
+}
+
+.gallery-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: #ffd6e7;
+    color: #a64d79;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.gallery-lightbox-close:hover {
+    background: #f4b8d5;
+    transform: rotate(90deg);
+}
+
+@keyframes galleryZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-lightbox {
+        padding: 15px;
+    }
+
+    .gallery-lightbox img {
+        max-width: 100%;
+        max-height: 80vh;
+    }
+
+    .gallery-lightbox-close {
+        top: 12px;
+        right: 12px;
+    }
+}
