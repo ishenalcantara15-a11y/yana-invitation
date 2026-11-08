@@ -4,11 +4,17 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    // ==========================================
     // GOOGLE SHEETS RSVP
+    // ==========================================
+
     const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbwkSxbXNJEwkM5FOSQl-rlesuG_K9UpifeKPCMg9mx7Bc9sC5o6IXHJLbdB-7WAAgMknA/exec";
 
 
+    // ==========================================
     // OPEN INVITATION
+    // ==========================================
+
     const intro = document.getElementById("intro");
     const openInvite = document.getElementById("openInvite");
 
@@ -20,7 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // ==========================================
     // MOBILE NAVIGATION
+    // ==========================================
+
     const menuToggle = document.getElementById("menuToggle");
     const navigation = document.getElementById("navigation");
 
@@ -41,7 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // ==========================================
     // COUNTDOWN
+    // ==========================================
+
     const eventDate = new Date("2026-12-20T11:00:00+08:00").getTime();
 
     function updateCountdown() {
@@ -81,7 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(updateCountdown, 1000);
 
 
+    // ==========================================
     // RSVP FORM
+    // ==========================================
+
     const form = document.getElementById("rsvpForm");
     const status = document.getElementById("formStatus");
     const guestCount = document.getElementById("guestCount");
@@ -164,7 +179,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // ==========================================
     // BACK TO TOP
+    // ==========================================
+
     const backToTop = document.getElementById("backToTop");
 
     if (backToTop) {
@@ -176,10 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    // ==========================================
-    // GODPARENTS LIST
-    // ==========================================
 
     // ==========================================
     // GODPARENTS LIST
@@ -229,7 +243,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         godparentSearch.addEventListener("input", function () {
 
-            const searchName = this.value.trim().toLowerCase();
+            const searchName = this.value
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g, " ");
 
             if (searchName === "") {
                 godparentResults.innerHTML = "<p>Your little surprise awaits... ♡</p>";
@@ -237,7 +254,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const matches = godparentsList.filter(function (person) {
-                return person.name.toLowerCase().includes(searchName);
+
+                return person.name
+                    .toLowerCase()
+                    .includes(searchName);
+
             });
 
             if (matches.length > 0) {
@@ -269,41 +290,51 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Godparents search elements are missing.");
     }
 
-    } else {
-        console.error("Godparents search elements are missing.");
+
+    // ==========================================
+    // BACKGROUND MUSIC PLAYER
+    // ==========================================
+
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    if (backgroundMusic && musicToggle) {
+
+        musicToggle.addEventListener("click", function () {
+
+            if (backgroundMusic.paused) {
+
+                backgroundMusic.play()
+                    .then(function () {
+                        musicToggle.textContent = "🎵 Pause Music";
+                        musicToggle.classList.add("playing");
+                    })
+                    .catch(function () {
+                        musicToggle.textContent = "🎵 Play Music";
+                    });
+
+            } else {
+
+                backgroundMusic.pause();
+                musicToggle.textContent = "🎵 Play Music";
+                musicToggle.classList.remove("playing");
+
+            }
+
+        });
+
+        backgroundMusic.addEventListener("ended", function () {
+            musicToggle.textContent = "🎵 Play Music";
+            musicToggle.classList.remove("playing");
+        });
+
     }
 
 
+    // ==========================================
+    // WEBSITE LOADED
+    // ==========================================
+
     console.log("Yana's invitation website loaded successfully! ♡");
 
-    // BACKGROUND MUSIC PLAYER
-const backgroundMusic = document.getElementById("backgroundMusic");
-const musicToggle = document.getElementById("musicToggle");
-
-if (backgroundMusic && musicToggle) {
-    musicToggle.addEventListener("click", function () {
-
-        if (backgroundMusic.paused) {
-            backgroundMusic.play()
-                .then(() => {
-                    musicToggle.textContent = "🎵 Pause Music";
-                    musicToggle.classList.add("playing");
-                })
-                .catch(() => {
-                    musicToggle.textContent = "🎵 Play Music";
-                });
-
-        } else {
-            backgroundMusic.pause();
-            musicToggle.textContent = "🎵 Play Music";
-            musicToggle.classList.remove("playing");
-        }
-
-    });
-
-    backgroundMusic.addEventListener("ended", function () {
-        musicToggle.textContent = "🎵 Play Music";
-        musicToggle.classList.remove("playing");
-    });
-}
 });
