@@ -181,38 +181,41 @@ document.addEventListener("DOMContentLoaded", function () {
     // GODPARENTS LIST
     // ==========================================
 
-const godparentsList = [
+    // ==========================================
+    // GODPARENTS LIST
+    // ==========================================
 
-    { name: "Krychel Ira DC. Alcantara", role: "Ninang" },
-    { name: "Mike Joseph R. Quizon", role: "Ninong" },
-    { name: "Margie C. Del Rosario", role: "Ninang" },
-    { name: "Ric Mark SM. Duquilar", role: "Ninong" },
-    { name: "Kristelle SM. Marzan", role: "Ninang" },
-    { name: "Aldrin S. Feliciano", role: "Ninong" },
-    { name: "Andrea E. Libunao", role: "Ninang" },
-    { name: "Samantha Rei K. Lomoljo", role: "Ninang" },
-    { name: "Mary Grace T. San Pedro", role: "Ninang" },
-    { name: "Sabriel Nicole K. Lomoljo", role: "Ninang" },
-    { name: "Ishen Alcantara", role: "Ninang" },
-    { name: "Irene A. Abundo", role: "Ninang" },
-    { name: "Jocelyn S. Yulay", role: "Ninang" },
-    { name: "Marjorie DC. Culala", role: "Ninang" },
-    { name: "Ailene D. Ligon", role: "Ninang" },
-    { name: "Clarisse Anne A. Buenaventura", role: "Ninang" },
-    { name: "Lucky D. Lomotos", role: "Ninang" },
-    { name: "Shikaina M. Lazaro", role: "Ninang" },
-    { name: "Lanie T. Dantis", role: "Ninang" },
-    { name: "Angel S. Lim", role: "Ninang" },
-    { name: "Emerlinda M. Toledo", role: "Ninang" },
-    { name: "Ann Michelle DC. Tomas", role: "Ninang" },
-    { name: "Janet G. Tizuela", role: "Ninang" },
-    { name: "Analyn S. Mapili", role: "Ninang" },
-    { name: "Amalia E. Velayo", role: "Ninang" },
-    { name: "Jaylyn L. Carpio", role: "Ninang" },
-    { name: "Francis Avan T. Alcantara", role: "Ninong" }
+    const godparentsList = [
 
-];
-```
+        { name: "Krychel Ira DC. Alcantara", role: "Ninang" },
+        { name: "Mike Joseph R. Quizon", role: "Ninong" },
+        { name: "Margie C. Del Rosario", role: "Ninang" },
+        { name: "Ric Mark SM. Duquilar", role: "Ninong" },
+        { name: "Kristelle SM. Marzan", role: "Ninang" },
+        { name: "Aldrin S. Feliciano", role: "Ninong" },
+        { name: "Andrea E. Libunao", role: "Ninang" },
+        { name: "Samantha Rei K. Lomoljo", role: "Ninang" },
+        { name: "Mary Grace T. San Pedro", role: "Ninang" },
+        { name: "Sabriel Nicole K. Lomoljo", role: "Ninang" },
+        { name: "Ishen P. Alcantara", role: "Ninang" },
+        { name: "Irene A. Abundo", role: "Ninang" },
+        { name: "Jocelyn S. Yulay", role: "Ninang" },
+        { name: "Marjorie DC. Culala", role: "Ninang" },
+        { name: "Ailene D. Ligon", role: "Ninang" },
+        { name: "Clarisse Anne A. Buenaventura", role: "Ninang" },
+        { name: "Lucky D. Lomotos", role: "Ninong" },
+        { name: "Shikaina M. Lazaro", role: "Ninang" },
+        { name: "Lanie T. Dantis", role: "Ninang" },
+        { name: "Angel S. Lim", role: "Ninang" },
+        { name: "Emerlinda M. Toledo", role: "Ninang" },
+        { name: "Ann Michelle DC. Tomas", role: "Ninang" },
+        { name: "Janet G. Tizuela", role: "Ninang" },
+        { name: "Analyn S. Mapili", role: "Ninang" },
+        { name: "Amalia E. Velayo", role: "Ninang" },
+        { name: "Jaylyn L. Carpio", role: "Ninang" },
+        { name: "Francis Avan T. Alcantara", role: "Ninong" }
+
+    ];
 
 
     // ==========================================
@@ -226,9 +229,7 @@ const godparentsList = [
 
         godparentSearch.addEventListener("input", function () {
 
-            const searchName = this.value
-                .trim()
-                .toLowerCase();
+            const searchName = this.value.trim().toLowerCase();
 
             if (searchName === "") {
                 godparentResults.innerHTML = "<p>Your little surprise awaits... ♡</p>";
@@ -263,6 +264,10 @@ const godparentsList = [
             }
 
         });
+
+    } else {
+        console.error("Godparents search elements are missing.");
+    }
 
     } else {
         console.error("Godparents search elements are missing.");
