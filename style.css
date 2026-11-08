@@ -1538,3 +1538,80 @@ footer {
         right: 12px;
     }
 }
+
+/* ==========================================
+   SANRIO CHARACTERS BESIDE MONTHLY PHOTOS
+========================================== */
+
+.gallery-month {
+    position: relative;
+    overflow: hidden;
+    padding: 22px 105px 22px 18px;
+    min-height: 280px;
+}
+
+.gallery-month a {
+    width: 100%;
+}
+
+.gallery-month img {
+    height: 250px;
+    object-fit: contain;
+}
+
+/* Sanrio character decorations */
+
+.gallery-month::after {
+    content: "";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 95px;
+    height: 125px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+}
+
+/* Different character for each month */
+
+.gallery-month:nth-child(5n + 1)::after {
+    background-image: url("hello-kitty.png");
+}
+
+.gallery-month:nth-child(5n + 2)::after {
+    background-image: url("my-melody.png");
+}
+
+.gallery-month:nth-child(5n + 3)::after {
+    background-image: url("kuromi.png");
+}
+
+.gallery-month:nth-child(5n + 4)::after {
+    background-image: url("cinnamoroll.png");
+}
+
+.gallery-month:nth-child(5n)::after {
+    background-image: url("pompompurin.png");
+}
+
+/* Mobile adjustment */
+
+@media (max-width: 650px) {
+    .gallery-month {
+        padding: 18px 85px 18px 14px;
+        min-height: 250px;
+    }
+
+    .gallery-month::after {
+        width: 78px;
+        height: 105px;
+        right: 5px;
+    }
+
+    .gallery-month img {
+        height: 220px;
+    }
+}
