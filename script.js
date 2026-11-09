@@ -394,6 +394,10 @@ document.addEventListener("keydown", function (event) {
 // YANA'S QUICKSNAP SLIDESHOW
 // =====================================
 
+// ==========================================
+// QUICKSNAP SLIDESHOW
+// ==========================================
+
 const quickSnapModal = document.getElementById("quickSnapModal");
 const quickSnapImage = document.getElementById("quickSnapImage");
 const quickSnapMonth = document.getElementById("quickSnapMonth");
@@ -414,8 +418,10 @@ let quickSnapPaused = false;
 
 const quickSnapDuration = 5000;
 
-// Get uploaded photos from the monthly gallery
+
+// GET PHOTOS FROM THE MONTHLY GALLERY
 async function loadQuickSnapPhotos() {
+
     const memories = [
         { src: "gallery/december2025.jpg", month: "December 2025" },
         { src: "gallery/january2026.jpg", month: "January 2026" },
@@ -448,21 +454,48 @@ async function loadQuickSnapPhotos() {
     quickSnapPhotos = results.filter(memory => memory !== null);
 }
 
-// Create progress bars
+
+// CREATE PROGRESS BARS
 function createQuickSnapProgress() {
+
     quickSnapProgress.innerHTML = "";
 
     quickSnapPhotos.forEach(() => {
+
         const bar = document.createElement("span");
         const fill = document.createElement("i");
 
         bar.appendChild(fill);
         quickSnapProgress.appendChild(bar);
+
     });
 }
 
-// Display current photo
+
+// UPDATE PROGRESS BARS
+function updateQuickSnapProgress() {
+
+    const bars = quickSnapProgress.querySelectorAll("i");
+
+    bars.forEach((bar, index) => {
+
+        if (index < currentSnap) {
+            bar.style.width = "100%";
+        } else if (index > currentSnap) {
+            bar.style.width = "0%";
+        } else {
+            bar.style.width =
+                (quickSnapElapsed / quickSnapDuration * 100) + "%";
+        }
+
+    });
+
+}
+
+
+// SHOW CURRENT PHOTO
 function showQuickSnap(index) {
+
     if (index >= quickSnapPhotos.length) {
         closeQuickSnapModal();
         return;
@@ -473,31 +506,18 @@ function showQuickSnap(index) {
     }
 
     currentSnap = index;
-    quickSnapImage.src = quickSnapPhotos[index].src;
-    quickSnapMonth.textContent = quickSnapPhotos[index].month;
 
-    updateQuickSnapProgress();
+    quickSnapImage.src = quickSnapPhotos[currentSnap].src;
+    quickSnapMonth.textContent = quickSnapPhotos[currentSnap].month;
+
     startQuickSnapTimer();
+
 }
 
-// Update progress bars
-function updateQuickSnapProgress() {
-    const bars = quickSnapProgress.querySelectorAll("i");
 
-    bars.forEach((bar, index) => {
-        if (index < currentSnap) {
-            bar.style.width = "100%";
-        } else if (index > currentSnap) {
-            bar.style.width = "0%";
-        } else {
-            bar.style.width =
-                (quickSnapElapsed / quickSnapDuration * 100) + "%";
-        }
-    });
-}
-
-// Start automatic slideshow
+// START AUTOMATIC SLIDESHOW
 function startQuickSnapTimer() {
+
     clearInterval(quickSnapTimer);
 
     quickSnapPaused = false;
@@ -507,6 +527,7 @@ function startQuickSnapTimer() {
     pauseQuickSnap.textContent = "❚❚";
 
     quickSnapTimer = setInterval(() => {
+
         quickSnapElapsed = Date.now() - quickSnapStart;
 
         updateQuickSnapProgress();
@@ -514,34 +535,63 @@ function startQuickSnapTimer() {
         if (quickSnapElapsed >= quickSnapDuration) {
             showQuickSnap(currentSnap + 1);
         }
+
     }, 50);
+
 }
 
-// Pause or resume
+
+// PAUSE OR RESUME SLIDESHOW
 function toggleQuickSnapPause() {
+
     if (!quickSnapPaused) {
-        quickSnapElapsed += Date.now() - quickSnapStart;
+
+        quickSnapElapsed = Date.now() - quickSnapStart;
+
         clearInterval(quickSnapTimer);
+
         quickSnapPaused = true;
+
         pauseQuickSnap.textContent = "▶";
+
+        updateQuickSnapProgress();
+
     } else {
+
         quickSnapStart = Date.now();
+
         quickSnapPaused = false;
+
         pauseQuickSnap.textContent = "❚❚";
 
         quickSnapTimer = setInterval(() => {
-            quickSnapElapsed = Date.now() - quickSnapStart;
+
+            const totalElapsed =
+                quickSnapElapsed + (Date.now() - quickSnapStart);
+
+            if (totalElapsed >= quickSnapDuration) {
+                showQuickSnap(currentSnap + 1);
+                return;
+            }
+
+            const previousElapsed = quickSnapElapsed;
+
+            quickSnapElapsed = totalElapsed;
+
             updateQuickSnapProgress();
 
-            if (quickSnapElapsed >= quickSnapDuration) {
-                showQuickSnap(currentSnap + 1);
-            }
+            quickSnapElapsed = previousElapsed;
+
         }, 50);
+
     }
+
 }
 
-// Open slideshow
+
+// OPEN SLIDESHOW
 async function openQuickSnapModal() {
+
     quickSnapPhotos = [];
 
     openQuickSnap.disabled = true;
@@ -558,13 +608,51 @@ async function openQuickSnapModal() {
     createQuickSnapProgress();
 
     quickSnapModal.classList.add("active");
+
     document.body.style.overflow = "hidden";
 
     showQuickSnap(0);
+
 }
 
-// Keyboard navigation
+
+// CLOSE SLIDESHOW
+function closeQuickSnapModal() {
+
+    clearInterval(quickSnapTimer);
+
+    quickSnapTimer = null;
+
+    quickSnapModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+    quickSnapPaused = false;
+
+    quickSnapElapsed = 0;
+
+}
+
+
+// BUTTON EVENTS
+openQuickSnap.addEventListener("click", openQuickSnapModal);
+
+closeQuickSnap.addEventListener("click", closeQuickSnapModal);
+
+previousSnap.addEventListener("click", () => {
+    showQuickSnap(currentSnap - 1);
+});
+
+nextSnap.addEventListener("click", () => {
+    showQuickSnap(currentSnap + 1);
+});
+
+pauseQuickSnap.addEventListener("click", toggleQuickSnapPause);
+
+
+// KEYBOARD NAVIGATION
 document.addEventListener("keydown", event => {
+
     if (!quickSnapModal.classList.contains("active")) return;
 
     if (event.key === "Escape") {
@@ -578,5 +666,6 @@ document.addEventListener("keydown", event => {
     if (event.key === "ArrowLeft") {
         showQuickSnap(currentSnap - 1);
     }
+
 });
 });
