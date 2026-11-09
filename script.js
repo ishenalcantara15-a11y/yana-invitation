@@ -415,22 +415,37 @@ let quickSnapPaused = false;
 const quickSnapDuration = 5000;
 
 // Get uploaded photos from the monthly gallery
-function loadQuickSnapPhotos() {
-    quickSnapPhotos = Array.from(
-        document.querySelectorAll(".gallery-month")
-    ).map(card => {
-        const img = card.querySelector("img");
-        const month = card.querySelector("h3");
+async function loadQuickSnapPhotos() {
+    const memories = [
+        { src: "gallery/december2025.jpg", month: "December 2025" },
+        { src: "gallery/january2026.jpg", month: "January 2026" },
+        { src: "gallery/february2026.jpg", month: "February 2026" },
+        { src: "gallery/march2026.jpg", month: "March 2026" },
+        { src: "gallery/april2026.jpg", month: "April 2026" },
+        { src: "gallery/may2026.jpg", month: "May 2026" },
+        { src: "gallery/june2026.jpg", month: "June 2026" },
+        { src: "gallery/july2026.jpg", month: "July 2026" },
+        { src: "gallery/august2026.jpg", month: "August 2026" },
+        { src: "gallery/september2026.jpg", month: "September 2026" },
+        { src: "gallery/october2026.jpg", month: "October 2026" },
+        { src: "gallery/november2026.jpg", month: "November 2026" },
+        { src: "gallery/december2026.jpg", month: "December 2026" }
+    ];
 
-        if (!img || img.hidden || !img.getAttribute("src")) {
-            return null;
-        }
+    const results = await Promise.all(
+        memories.map(memory => {
+            return new Promise(resolve => {
+                const image = new Image();
 
-        return {
-            src: img.src,
-            month: month ? month.textContent.trim() : "Yana's Memory"
-        };
-    }).filter(photo => photo !== null);
+                image.onload = () => resolve(memory);
+                image.onerror = () => resolve(null);
+
+                image.src = memory.src;
+            });
+        })
+    );
+
+    quickSnapPhotos = results.filter(memory => memory !== null);
 }
 
 // Create progress bars
@@ -526,8 +541,14 @@ function toggleQuickSnapPause() {
 }
 
 // Open slideshow
-function openQuickSnapModal() {
-    loadQuickSnapPhotos();
+async function openQuickSnapModal() {
+    quickSnapPhotos = [];
+
+    openQuickSnap.disabled = true;
+
+    await loadQuickSnapPhotos();
+
+    openQuickSnap.disabled = false;
 
     if (quickSnapPhotos.length === 0) {
         alert("No uploaded photos available yet. ♡");
@@ -541,28 +562,6 @@ function openQuickSnapModal() {
 
     showQuickSnap(0);
 }
-
-// Close slideshow
-function closeQuickSnapModal() {
-    clearInterval(quickSnapTimer);
-
-    quickSnapModal.classList.remove("active");
-    document.body.style.overflow = "";
-}
-
-// Navigation buttons
-openQuickSnap.addEventListener("click", openQuickSnapModal);
-closeQuickSnap.addEventListener("click", closeQuickSnapModal);
-
-nextSnap.addEventListener("click", () => {
-    showQuickSnap(currentSnap + 1);
-});
-
-previousSnap.addEventListener("click", () => {
-    showQuickSnap(currentSnap - 1);
-});
-
-pauseQuickSnap.addEventListener("click", toggleQuickSnapPause);
 
 // Keyboard navigation
 document.addEventListener("keydown", event => {
