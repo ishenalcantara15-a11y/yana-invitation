@@ -213,12 +213,11 @@
         here's a collection of Yana's sweetest memories. ♡
     </p>
 
-    <button id="openQuickSnap">
+    <button type="button" id="openQuickSnap" class="quicksnap-open">
     QuickSnap
 </button>
 
-    ♡ View Memories
-</button>
+<span>♡ View Memories</span>
 </section>
 
 <!-- LOCATION -->
@@ -362,6 +361,73 @@
     </div>
 
 </section>
+
+<!-- 30 CANDLES SECTION -->
+<section class="candles-section" id="thirtyCandles">
+
+    <div class="candles-heading">
+        <span>🕯️ A Special Tribute</span>
+        <h2>30 Candles for Yana</h2>
+        <p>
+            To our beloved godparents, choose one candle and leave
+            a heartfelt message for Yana as she grows.
+        </p>
+    </div>
+
+    <div class="candles-note">
+        Each candle represents a special wish filled with love.
+        Choose your candle and let your light shine for Yana! ♡
+    </div>
+
+    <div class="candles-grid" id="candlesGrid">
+        <!-- Candles will be generated using JavaScript -->
+    </div>
+
+    <div class="candles-legend">
+        <span>🕯️ Available</span>
+        <span>✨ Already Claimed</span>
+    </div>
+
+</section>
+
+<!-- CANDLE MESSAGE MODAL -->
+<div class="candle-modal" id="candleModal">
+
+    <div class="candle-modal-content">
+
+        <button type="button" class="candle-close" id="closeCandleModal">
+            &times;
+        </button>
+
+        <span class="candle-modal-icon">🕯️</span>
+
+        <h2>Light a Candle for Yana</h2>
+
+        <p id="selectedCandleText">Candle Number 1</p>
+
+        <label for="godparentSelect">Choose your name</label>
+
+        <select id="godparentSelect">
+            <option value="">Select your name</option>
+        </select>
+
+        <label for="candleMessage">Your heartfelt message</label>
+
+        <textarea
+            id="candleMessage"
+            placeholder="Write your special message for Yana..."
+            maxlength="500"
+        ></textarea>
+
+        <button type="button" id="submitCandle">
+            Light My Candle ♡
+        </button>
+
+        <p id="candleStatus"></p>
+
+    </div>
+
+</div>
 
 <!-- RSVP SECTION -->
 <section class="section rsvp-section" id="rsvp">
@@ -531,7 +597,7 @@
 
 </div>
 
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 
 </body>
 </html>

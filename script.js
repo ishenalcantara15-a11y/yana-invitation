@@ -394,10 +394,6 @@ document.addEventListener("keydown", function (event) {
 // YANA'S QUICKSNAP SLIDESHOW
 // =====================================
 
-// ==========================================
-// QUICKSNAP SLIDESHOW
-// ==========================================
-
 const quickSnapModal = document.getElementById("quickSnapModal");
 const quickSnapImage = document.getElementById("quickSnapImage");
 const quickSnapMonth = document.getElementById("quickSnapMonth");
@@ -668,4 +664,448 @@ document.addEventListener("keydown", event => {
     }
 
 });
+
+// ==========================================
+// 30 CANDLES FOR YANA
+// ==========================================
+
+const CANDLE_API_URL = RSVP_ENDPOINT;
+
+const candleGrid = document.getElementById("candlesGrid");
+const candleModal = document.getElementById("candleModal");
+const closeCandleModal = document.getElementById("closeCandleModal");
+const selectedCandleText = document.getElementById("selectedCandleText");
+const godparentSelect = document.getElementById("godparentSelect");
+const candleMessage = document.getElementById("candleMessage");
+const submitCandle = document.getElementById("submitCandle");
+const candleStatus = document.getElementById("candleStatus");
+
+let selectedCandleNumber = null;
+let claimedCandles = [];
+
+
+// ==========================================
+// GODPARENTS LIST
+// ==========================================
+
+const candleGodparents = godparentsList.map(person => person.name);
+
+
+// ==========================================
+// POPULATE GODPARENT DROPDOWN
+// ==========================================
+
+if (godparentSelect) {
+
+    candleGodparents.forEach(name => {
+
+        const option = document.createElement("option");
+
+        option.value = name;
+        option.textContent = name;
+
+        godparentSelect.appendChild(option);
+
+    });
+
+}
+
+
+// ==========================================
+// LOAD CLAIMED CANDLES
+// ==========================================
+
+function loadClaimedCandles() {
+
+    return new Promise((resolve, reject) => {
+
+        const callbackName = "candleCallback_" + Date.now();
+
+        const script = document.createElement("script");
+
+        const timeout = setTimeout(() => {
+
+            delete window[callbackName];
+            script.remove();
+
+            reject(new Error("Candle loading timed out."));
+
+        }, 15000);
+
+
+        window[callbackName] = function(data) {
+
+            clearTimeout(timeout);
+
+            delete window[callbackName];
+            script.remove();
+
+            if (!data || data.result !== "success") {
+
+                reject(new Error("Unable to load candle records."));
+                return;
+
+            }
+
+            claimedCandles = data.candles || [];
+
+            resolve(claimedCandles);
+
+        };
+
+
+        script.onerror = function() {
+
+            clearTimeout(timeout);
+
+            delete window[callbackName];
+            script.remove();
+
+            reject(new Error("Unable to connect to Google Sheets."));
+
+        };
+
+
+        script.src =
+            CANDLE_API_URL +
+            "?action=getCandles&callback=" +
+            callbackName;
+
+        document.body.appendChild(script);
+
+    });
+
+}
+
+
+// ==========================================
+// GENERATE 30 CANDLES
+// ==========================================
+
+async function generateCandles() {
+
+    if (!candleGrid) return;
+
+    candleGrid.innerHTML = "<p>Loading candles... ♡</p>";
+
+    try {
+
+        await loadClaimedCandles();
+
+        candleGrid.innerHTML = "";
+
+        for (let i = 1; i <= 30; i++) {
+
+            const candle = document.createElement("button");
+
+            candle.type = "button";
+            candle.className = "candle-item";
+
+            const claimed = claimedCandles.find(item =>
+                Number(item.candleNumber) === i
+            );
+
+            if (claimed) {
+
+                candle.classList.add("claimed");
+
+                candle.innerHTML = `
+                    <span class="candle-emoji">✨</span>
+                    <span class="candle-number">Candle ${i}</span>
+                    <small>Claimed</small>
+                `;
+
+                candle.disabled = true;
+
+            } else {
+
+                candle.innerHTML = `
+                    <span class="candle-emoji">🕯️</span>
+                    <span class="candle-number">Candle ${i}</span>
+                `;
+
+                candle.addEventListener("click", function() {
+
+                    openCandleModal(i);
+
+                });
+
+            }
+
+            candleGrid.appendChild(candle);
+
+        }
+
+    } catch (error) {
+
+        console.error("Candle loading error:", error);
+
+        candleGrid.innerHTML =
+            "<p>Unable to load candles. Please refresh the page. ♡</p>";
+
+    }
+
+}
+
+
+// ==========================================
+// OPEN CANDLE MODAL
+// ==========================================
+
+function openCandleModal(number) {
+
+    if (!candleModal) return;
+
+    selectedCandleNumber = number;
+
+    selectedCandleText.textContent = "Candle Number " + number;
+
+    godparentSelect.value = "";
+    candleMessage.value = "";
+    candleStatus.textContent = "";
+
+    candleModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+}
+
+
+// ==========================================
+// CLOSE CANDLE MODAL
+// ==========================================
+
+function closeCandleWindow() {
+
+    if (!candleModal) return;
+
+    candleModal.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+    selectedCandleNumber = null;
+
+    submitCandle.disabled = false;
+
+    submitCandle.textContent = "Light My Candle ♡";
+
+}
+
+
+// ==========================================
+// MODAL BUTTON EVENTS
+// ==========================================
+
+if (closeCandleModal) {
+
+    closeCandleModal.addEventListener("click", closeCandleWindow);
+
+}
+
+if (candleModal) {
+
+    candleModal.addEventListener("click", function(event) {
+
+        if (event.target === candleModal) {
+
+            closeCandleWindow();
+
+        }
+
+    });
+
+}
+
+
+// ==========================================
+// SUBMIT CANDLE MESSAGE
+// ==========================================
+
+if (submitCandle) {
+
+    submitCandle.addEventListener("click", async function() {
+
+        const godparentName = godparentSelect.value;
+        const message = candleMessage.value.trim();
+
+        if (!selectedCandleNumber) {
+
+            candleStatus.textContent = "Please select a candle first. ♡";
+            return;
+
+        }
+
+        if (!godparentName) {
+
+            candleStatus.textContent = "Please select your name. ♡";
+            return;
+
+        }
+
+        if (!message) {
+
+            candleStatus.textContent = "Please write a message for Yana. ♡";
+            return;
+
+        }
+
+        submitCandle.disabled = true;
+        submitCandle.textContent = "Saving your candle...";
+
+        const payload = {
+
+            action: "claimCandle",
+            candleNumber: selectedCandleNumber,
+            godparentName: godparentName,
+            message: message
+
+        };
+
+        try {
+
+            await fetch(CANDLE_API_URL, {
+
+                method: "POST",
+                mode: "no-cors",
+
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify(payload)
+
+            });
+
+
+            // CHECK IF THE CANDLE WAS SAVED
+
+            let savedCandle = null;
+
+            for (let attempt = 0; attempt < 8; attempt++) {
+
+                await new Promise(resolve =>
+                    setTimeout(resolve, 1000)
+                );
+
+                await loadClaimedCandles();
+
+                savedCandle = claimedCandles.find(item =>
+
+                    Number(item.candleNumber) === selectedCandleNumber &&
+
+                    String(item.godparentName).trim().toLowerCase() ===
+                    godparentName.trim().toLowerCase()
+
+                );
+
+                if (savedCandle) break;
+
+            }
+
+
+            if (savedCandle) {
+
+                candleStatus.textContent =
+                    "Your candle is now glowing for Yana! Thank you! ♡";
+
+                await generateCandles();
+
+                setTimeout(function() {
+
+                    closeCandleWindow();
+
+                }, 2000);
+
+            } else {
+
+                candleStatus.textContent =
+                    "This candle may already be claimed. Please try again.";
+
+                submitCandle.disabled = false;
+
+                submitCandle.textContent = "Light My Candle ♡";
+
+            }
+
+        } catch (error) {
+
+            console.error("Candle submission error:", error);
+
+            candleStatus.textContent =
+                "Unable to verify your submission. Please try again.";
+
+            submitCandle.disabled = false;
+
+            submitCandle.textContent = "Light My Candle ♡";
+
+        }
+
+    });
+
+}
+
+
+// ==========================================
+// INITIALIZE CANDLES
+// ==========================================
+
+if (candleGrid && candleModal && godparentSelect) {
+
+    generateCandles();
+
+}
+
+
+// ==========================================
+// KEYBOARD NAVIGATION
+// ==========================================
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        closeGalleryLightbox();
+
+        if (quickSnapModal && quickSnapModal.classList.contains("active")) {
+
+            closeQuickSnapModal();
+
+        }
+
+        if (candleModal && candleModal.classList.contains("active")) {
+
+            closeCandleWindow();
+
+        }
+
+    }
+
+    if (
+        quickSnapModal &&
+        quickSnapModal.classList.contains("active")
+    ) {
+
+        if (event.key === "ArrowRight") {
+
+            showQuickSnap(currentSnap + 1);
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            showQuickSnap(currentSnap - 1);
+
+        }
+
+    }
+
+});
+
+
+// ==========================================
+// WEBSITE LOADED
+// ==========================================
+
+console.log("Yana's invitation website loaded successfully! ♡");
+
 });
