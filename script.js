@@ -389,4 +389,195 @@ document.addEventListener("keydown", function (event) {
         closeGalleryLightbox();
     }
 });
+
+// =====================================
+// YANA'S QUICKSNAP SLIDESHOW
+// =====================================
+
+const quickSnapModal = document.getElementById("quickSnapModal");
+const quickSnapImage = document.getElementById("quickSnapImage");
+const quickSnapMonth = document.getElementById("quickSnapMonth");
+const quickSnapProgress = document.getElementById("quickSnapProgress");
+
+const openQuickSnap = document.getElementById("openQuickSnap");
+const closeQuickSnap = document.getElementById("closeQuickSnap");
+const previousSnap = document.getElementById("previousSnap");
+const nextSnap = document.getElementById("nextSnap");
+const pauseQuickSnap = document.getElementById("pauseQuickSnap");
+
+let quickSnapPhotos = [];
+let currentSnap = 0;
+let quickSnapTimer = null;
+let quickSnapStart = 0;
+let quickSnapElapsed = 0;
+let quickSnapPaused = false;
+
+const quickSnapDuration = 5000;
+
+// Get uploaded photos from the monthly gallery
+function loadQuickSnapPhotos() {
+    quickSnapPhotos = Array.from(
+        document.querySelectorAll(".gallery-month")
+    ).map(card => {
+        const img = card.querySelector("img");
+        const month = card.querySelector("h3");
+
+        if (!img || img.hidden || !img.getAttribute("src")) {
+            return null;
+        }
+
+        return {
+            src: img.src,
+            month: month ? month.textContent.trim() : "Yana's Memory"
+        };
+    }).filter(photo => photo !== null);
+}
+
+// Create progress bars
+function createQuickSnapProgress() {
+    quickSnapProgress.innerHTML = "";
+
+    quickSnapPhotos.forEach(() => {
+        const bar = document.createElement("span");
+        const fill = document.createElement("i");
+
+        bar.appendChild(fill);
+        quickSnapProgress.appendChild(bar);
+    });
+}
+
+// Display current photo
+function showQuickSnap(index) {
+    if (index >= quickSnapPhotos.length) {
+        closeQuickSnapModal();
+        return;
+    }
+
+    if (index < 0) {
+        index = 0;
+    }
+
+    currentSnap = index;
+    quickSnapImage.src = quickSnapPhotos[index].src;
+    quickSnapMonth.textContent = quickSnapPhotos[index].month;
+
+    updateQuickSnapProgress();
+    startQuickSnapTimer();
+}
+
+// Update progress bars
+function updateQuickSnapProgress() {
+    const bars = quickSnapProgress.querySelectorAll("i");
+
+    bars.forEach((bar, index) => {
+        if (index < currentSnap) {
+            bar.style.width = "100%";
+        } else if (index > currentSnap) {
+            bar.style.width = "0%";
+        } else {
+            bar.style.width =
+                (quickSnapElapsed / quickSnapDuration * 100) + "%";
+        }
+    });
+}
+
+// Start automatic slideshow
+function startQuickSnapTimer() {
+    clearInterval(quickSnapTimer);
+
+    quickSnapPaused = false;
+    quickSnapElapsed = 0;
+    quickSnapStart = Date.now();
+
+    pauseQuickSnap.textContent = "❚❚";
+
+    quickSnapTimer = setInterval(() => {
+        quickSnapElapsed = Date.now() - quickSnapStart;
+
+        updateQuickSnapProgress();
+
+        if (quickSnapElapsed >= quickSnapDuration) {
+            showQuickSnap(currentSnap + 1);
+        }
+    }, 50);
+}
+
+// Pause or resume
+function toggleQuickSnapPause() {
+    if (!quickSnapPaused) {
+        quickSnapElapsed += Date.now() - quickSnapStart;
+        clearInterval(quickSnapTimer);
+        quickSnapPaused = true;
+        pauseQuickSnap.textContent = "▶";
+    } else {
+        quickSnapStart = Date.now();
+        quickSnapPaused = false;
+        pauseQuickSnap.textContent = "❚❚";
+
+        quickSnapTimer = setInterval(() => {
+            quickSnapElapsed = Date.now() - quickSnapStart;
+            updateQuickSnapProgress();
+
+            if (quickSnapElapsed >= quickSnapDuration) {
+                showQuickSnap(currentSnap + 1);
+            }
+        }, 50);
+    }
+}
+
+// Open slideshow
+function openQuickSnapModal() {
+    loadQuickSnapPhotos();
+
+    if (quickSnapPhotos.length === 0) {
+        alert("No uploaded photos available yet. ♡");
+        return;
+    }
+
+    createQuickSnapProgress();
+
+    quickSnapModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    showQuickSnap(0);
+}
+
+// Close slideshow
+function closeQuickSnapModal() {
+    clearInterval(quickSnapTimer);
+
+    quickSnapModal.classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+// Navigation buttons
+openQuickSnap.addEventListener("click", openQuickSnapModal);
+closeQuickSnap.addEventListener("click", closeQuickSnapModal);
+
+nextSnap.addEventListener("click", () => {
+    showQuickSnap(currentSnap + 1);
+});
+
+previousSnap.addEventListener("click", () => {
+    showQuickSnap(currentSnap - 1);
+});
+
+pauseQuickSnap.addEventListener("click", toggleQuickSnapPause);
+
+// Keyboard navigation
+document.addEventListener("keydown", event => {
+    if (!quickSnapModal.classList.contains("active")) return;
+
+    if (event.key === "Escape") {
+        closeQuickSnapModal();
+    }
+
+    if (event.key === "ArrowRight") {
+        showQuickSnap(currentSnap + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+        showQuickSnap(currentSnap - 1);
+    }
+});
 });

@@ -213,6 +213,9 @@
         here's a collection of Yana's sweetest memories. ♡
     </p>
 
+    <button type="button" id="openQuickSnap" class="quicksnap-open">
+    ♡ View Memories
+</button>
     <div class="gallery-months">
 
         <!-- DECEMBER 2025 -->
@@ -648,6 +651,42 @@
 <button id="musicToggle" class="music-toggle" type="button">
     🎵 Play Music
 </button>
+
+<!-- QUICKSNAP SLIDESHOW -->
+<div id="quickSnapModal" class="quicksnap-modal">
+
+    <div class="quicksnap-container">
+
+        <div class="quicksnap-progress" id="quickSnapProgress"></div>
+
+        <button type="button" class="quicksnap-close" id="closeQuickSnap">
+            &times;
+        </button>
+
+        <button type="button" class="quicksnap-nav previous" id="previousSnap">
+            &#10094;
+        </button>
+
+        <div class="quicksnap-photo">
+            <img id="quickSnapImage" src="" alt="Yana's monthly memory">
+
+            <div class="quicksnap-caption">
+                <h3 id="quickSnapMonth"></h3>
+                <p>Yana's Little Memories ♡</p>
+            </div>
+        </div>
+
+        <button type="button" class="quicksnap-nav next" id="nextSnap">
+            &#10095;
+        </button>
+
+        <button type="button" class="quicksnap-play" id="pauseQuickSnap">
+            ❚❚
+        </button>
+
+    </div>
+
+</div>
 
 <script src="script.js?v=7"></script>
 
