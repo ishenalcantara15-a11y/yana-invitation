@@ -199,37 +199,38 @@ document.addEventListener("DOMContentLoaded", function () {
     // GODPARENTS LIST
     // ==========================================
 
-    const godparentsList = [
+const godparentsList = [
 
-        { name: "Krychel Ira DC. Alcantara", role: "Ninang" },
-        { name: "Mike Joseph R. Quizon", role: "Ninong" },
-        { name: "Margie C. Del Rosario", role: "Ninang" },
-        { name: "Ric Mark SM. Duquilar", role: "Ninong" },
-        { name: "Kristelle SM. Marzan", role: "Ninang" },
-        { name: "Aldrin S. Feliciano", role: "Ninong" },
-        { name: "Andrea E. Libunao", role: "Ninang" },
-        { name: "Samantha Rei K. Lomoljo", role: "Ninang" },
-        { name: "Mary Grace T. San Pedro", role: "Ninang" },
-        { name: "Sabriel Nicole K. Lomoljo", role: "Ninang" },
-        { name: "Ishen Alcantara", role: "Ninang" },
-        { name: "Irene A. Abundo", role: "Ninang" },
-        { name: "Jocelyn S. Yulay", role: "Ninang" },
-        { name: "Marjorie DC. Culala", role: "Ninang" },
-        { name: "Ailene D. Ligon", role: "Ninang" },
-        { name: "Clarisse Anne A. Buenaventura", role: "Ninang" },
-        { name: "Lucky D. Lomotos", role: "Ninang" },
-        { name: "Shikaina M. Lazaro", role: "Ninang" },
-        { name: "Lanie T. Dantis", role: "Ninang" },
-        { name: "Angel S. Lim", role: "Ninang" },
-        { name: "Emerlinda M. Toledo", role: "Ninang" },
-        { name: "Ann Michelle DC. Tomas", role: "Ninang" },
-        { name: "Janet G. Tizuela", role: "Ninang" },
-        { name: "Analyn S. Mapili", role: "Ninang" },
-        { name: "Amalia E. Velayo", role: "Ninang" },
-        { name: "Jaylyn L. Carpio", role: "Ninang" },
-        { name: "Francis Avan T. Alcantara", role: "Ninong" }
+    { name: "Ailene D. Ligon", role: "Ninang" },
+    { name: "Aldrin S. Feliciano", role: "Ninong" },
+    { name: "Amalia E. Velayo", role: "Ninang" },
+    { name: "Analyn S. Mapili", role: "Ninang" },
+    { name: "Andrea E. Libunao", role: "Ninang" },
+    { name: "Angel S. Lim", role: "Ninang" },
+    { name: "Ann Michelle DC. Tomas", role: "Ninang" },
+    { name: "Clarisse Anne A. Buenaventura", role: "Ninang" },
+    { name: "Emerlinda M. Toledo", role: "Ninang" },
+    { name: "Francis Avan T. Alcantara", role: "Ninong" },
+    { name: "Irene A. Abundo", role: "Ninang" },
+    { name: "Ishen Alcantara", role: "Ninang" },
+    { name: "Janet G. Tizuela", role: "Ninang" },
+    { name: "Jaylyn L. Carpio", role: "Ninang" },
+    { name: "Jocelyn S. Yulay", role: "Ninang" },
+    { name: "Kristelle SM. Marzan", role: "Ninang" },
+    { name: "Krychel Ira DC. Alcantara", role: "Ninang" },
+    { name: "Lanie T. Dantis", role: "Ninang" },
+    { name: "Lucky D. Lomotos", role: "Ninang" },
+    { name: "Margie C. Del Rosario", role: "Ninang" },
+    { name: "Marjorie DC. Culala", role: "Ninang" },
+    { name: "Marvic P. Delos Reyes", role: "Ninong" },
+    { name: "Mary Grace T. San Pedro", role: "Ninang" },
+    { name: "Mike Joseph R. Quizon", role: "Ninong" },
+    { name: "Ric Mark SM. Duquilar", role: "Ninong" },
+    { name: "Sabriel Nicole K. Lomoljo", role: "Ninang" },
+    { name: "Samantha Rei K. Lomoljo", role: "Ninang" },
+    { name: "Shikaina M. Lazaro", role: "Ninang" }
 
-    ];
+];
 
 
     // ==========================================
