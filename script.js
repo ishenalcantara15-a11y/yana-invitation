@@ -210,6 +210,7 @@ const godparentsList = [
     { name: "Ann Michelle DC. Tomas", role: "Ninang" },
     { name: "Clarisse Anne A. Buenaventura", role: "Ninang" },
     { name: "Contessa J. Mariano", role: "Ninang" },
+    { name: "Earvin Pineda", role: "Ninong" },
     { name: "Emerlinda M. Toledo", role: "Ninang" },
     { name: "Francis Avan T. Alcantara", role: "Ninong" },
     { name: "Irene A. Abundo", role: "Ninang" },
@@ -217,6 +218,7 @@ const godparentsList = [
     { name: "Janet G. Tizuela", role: "Ninang" },
     { name: "Jaylyn L. Carpio", role: "Ninang" },
     { name: "Jocelyn S. Yulay", role: "Ninang" },
+    { name: "John Cris Cabrera", role: "Ninong" },
     { name: "Kristelle SM. Marzan", role: "Ninang" },
     { name: "Krychel Ira DC. Alcantara", role: "Ninang" },
     { name: "Lanie T. Dantis", role: "Ninang" },
@@ -226,14 +228,15 @@ const godparentsList = [
     { name: "Marjorie I. Villacete", role: "Ninang" },
     { name: "Marvic P. Delos Reyes", role: "Ninong" },
     { name: "Mary Grace T. San Pedro", role: "Ninang" },
+    { name: "Melvin Mascariola", role: "Ninong" },
     { name: "Mike Joseph R. Quizon", role: "Ninong" },
     { name: "Ric Mark SM. Duquilar", role: "Ninong" },
+    { name: "Romel Pineda", role: "Ninong" },
     { name: "Sabriel Nicole K. Lomoljo", role: "Ninang" },
     { name: "Samantha Rei K. Lomoljo", role: "Ninang" },
     { name: "Shikaina M. Lazaro", role: "Ninang" }
 
 ];
-
 
     // ==========================================
     // GODPARENTS SEARCH
