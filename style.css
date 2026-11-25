@@ -2033,10 +2033,11 @@ footer {
 }
 
 .floating-cinnamoroll {
-    width: 130px;
+    width: 65px;
     height: auto;
-    opacity: 0.95;
+    opacity: 0.65;
     animation: cinnamorollFloat 4s ease-in-out infinite;
+}
 }
 
 @keyframes cinnamorollFloat {
@@ -2051,12 +2052,6 @@ footer {
 /* Mobile adjustment */
 @media (max-width: 600px) {
     .floating-cinnamoroll {
-        width: 85px;
+        width: 45px;
     }
-
-    .countdown-decoration {
-        right: 5px;
-        bottom: 0;
-    }
-}
 }
