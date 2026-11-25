@@ -430,6 +430,16 @@ nav a:hover {
   background: #fff8fc;
 }
 
+.countdown-decoration {
+    z-index: 0;
+    opacity: 0.30;
+}
+
+.countdown-section > *:not(.countdown-decoration) {
+    position: relative;
+    z-index: 2;
+}
+
 .countdown {
   display: flex;
   justify-content: center;
