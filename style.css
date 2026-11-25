@@ -2032,14 +2032,6 @@ footer {
     pointer-events: none;
 }
 
-.floating-cinnamoroll {
-    width: 65px;
-    height: auto;
-    opacity: 0.65;
-    animation: cinnamorollFloat 4s ease-in-out infinite;
-}
-}
-
 @keyframes cinnamorollFloat {
     0%, 100% {
         transform: translateY(0);
@@ -2049,9 +2041,22 @@ footer {
     }
 }
 
-/* Mobile adjustment */
+/* TINY CINNAMOROLL */
+#countdown .floating-cinnamoroll {
+    width: 30px !important;
+    max-width: 30px !important;
+    height: auto !important;
+    opacity: 0.55;
+}
+
+#countdown .countdown-decoration {
+    right: 8px;
+    bottom: 5px;
+}
+
 @media (max-width: 600px) {
-    .floating-cinnamoroll {
-        width: 45px;
+    #countdown .floating-cinnamoroll {
+        width: 24px !important;
     }
+}
 }
