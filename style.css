@@ -2085,3 +2085,12 @@ footer {
         max-width: 28px !important;
     }
 }
+
+.countdown-decoration .floating-cinnamoroll {
+    width: 25px !important;
+    max-width: 25px !important;
+    height: auto !important;
+    min-width: 0 !important;
+    display: block !important;
+    object-fit: contain;
+}
