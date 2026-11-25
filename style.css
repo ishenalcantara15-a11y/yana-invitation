@@ -2060,3 +2060,28 @@ footer {
     }
 }
 }
+
+/* FORCE SMALL CINNAMOROLL */
+.countdown-section img.floating-cinnamoroll {
+    width: 35px !important;
+    max-width: 35px !important;
+    height: auto !important;
+    display: block;
+    object-fit: contain;
+}
+
+.countdown-section .countdown-decoration {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 35px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .countdown-section img.floating-cinnamoroll {
+        width: 28px !important;
+        max-width: 28px !important;
+    }
+}
